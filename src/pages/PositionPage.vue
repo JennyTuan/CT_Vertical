@@ -33,15 +33,29 @@
                 :class="{ 'mdi-spin': isSyncing }"
                 class="ct-guide-icon" 
               />
-              <h3>{{ isSyncing ? '模式同步中...' : '模式不匹配' }}</h3>
+              <h3>{{ isSyncing ? `同步中 ${progressPercent}%` : '模式不匹配' }}</h3>
             </div>
             
             <div class="ct-guide-text">
-              <p>请按住面板上的高亮按钮，直到设备完全切换至 <span class="text-primary font-weight-bold">【{{ targetLabel }}模式】</span></p>
+              <div class="ct-mode-comparison">
+                <div class="ct-mode-item">
+                  <span class="ct-mode-tag">当前硬件</span>
+                  <span class="ct-mode-val">{{ currentHwLabel }}模式</span>
+                </div>
+                <v-icon icon="mdi-arrow-right-thin" class="ct-mode-arrow" />
+                <div class="ct-mode-item target">
+                  <span class="ct-mode-tag">所需模式</span>
+                  <span class="ct-mode-val">{{ targetLabel }}模式</span>
+                </div>
+              </div>
+              <p class="ct-action-hint">
+                <v-icon icon="mdi-gesture-tap-hold" size="14" class="mr-1" />
+                请<strong>长按</strong>图中高亮按键进行切换
+              </p>
             </div>
 
-            <!-- Realistic Physical Panel Illustration -->
-            <div class="ct-panel-illus side-style">
+            <!-- Realistic Physical Panel Illustration with Interaction -->
+            <div class="ct-panel-illus side-style" :class="{ 'is-syncing': isSyncing }">
               <div class="ct-illus-shell">
                 <div class="ct-illus-sensor"></div>
                 
@@ -50,14 +64,36 @@
                   <div 
                     class="ct-illus-btn mode-btn horizontal" 
                     :class="{ active: targetMode === SCAN_MODES.HORIZONTAL }"
+                    @mousedown="targetMode === SCAN_MODES.HORIZONTAL && startSyncing()"
+                    @mouseup="stopSyncing"
+                    @mouseleave="stopSyncing"
+                    @touchstart.prevent="targetMode === SCAN_MODES.HORIZONTAL && startSyncing()"
+                    @touchend="stopSyncing"
                   >
                     <v-icon icon="mdi-rectangle-outline" size="16" />
+                    <!-- Progress Overlay -->
+                    <div 
+                      v-if="isSyncing && targetMode === SCAN_MODES.HORIZONTAL" 
+                      class="ct-btn-progress" 
+                      :style="{ height: syncProgress + '%' }"
+                    ></div>
                   </div>
                   <div 
                     class="ct-illus-btn mode-btn vertical" 
                     :class="{ active: targetMode === SCAN_MODES.VERTICAL }"
+                    @mousedown="targetMode === SCAN_MODES.VERTICAL && startSyncing()"
+                    @mouseup="stopSyncing"
+                    @mouseleave="stopSyncing"
+                    @touchstart.prevent="targetMode === SCAN_MODES.VERTICAL && startSyncing()"
+                    @touchend="stopSyncing"
                   >
                     <v-icon icon="mdi-rectangle-outline" size="16" />
+                    <!-- Progress Overlay -->
+                    <div 
+                      v-if="isSyncing && targetMode === SCAN_MODES.VERTICAL" 
+                      class="ct-btn-progress" 
+                      :style="{ height: syncProgress + '%' }"
+                    ></div>
                   </div>
                 </div>
 
@@ -82,16 +118,13 @@
                 </div>
               </div>
             </div>
-
-            <p class="ct-guide-hint">观察中心数值变化</p>
-            <button class="ct-guide-debug-btn" @click="handleSync">模拟就位</button>
           </div>
         </div>
       </transition>
     </div>
 
     <div class="ct-action-bar">
-      <button class="ct-secondary" :disabled="currentStep === 'position'" @click="goBack">
+      <button class="ct-secondary" @click="goBack">
         <v-icon size="18" icon="mdi-chevron-left" />
         <span>返回</span>
       </button>
@@ -115,11 +148,14 @@ import { useScanState } from '@/composables/useScanState';
 const router = useRouter();
 const {
   targetMode,
+  currentHwMode,
   isSyncing,
+  syncProgress,
   isMatched,
   currentStep,
   time,
-  handleSync,
+  startSyncing,
+  stopSyncing,
   setTargetMode,
   setCurrentStep,
 } = useScanState();
@@ -128,13 +164,19 @@ const targetLabel = computed(() =>
   targetMode.value === SCAN_MODES.HORIZONTAL ? '水平' : '垂直'
 );
 
+const currentHwLabel = computed(() =>
+  currentHwMode.value === SCAN_MODES.HORIZONTAL ? '水平' : '垂直'
+);
+
+const progressPercent = computed(() => Math.floor(syncProgress.value));
+
 onMounted(() => {
   setCurrentStep('position');
 });
 
 const goBack = () => {
   setCurrentStep('position');
-  router.push('/position');
+  router.push('/');
 };
 
 const confirmPosition = () => {
@@ -205,13 +247,55 @@ const confirmPosition = () => {
 }
 
 .ct-guide-text {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.ct-guide-text p {
-  font-size: 13px;
-  line-height: 1.6;
+.ct-mode-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #FFFFFF;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #E1E4E8;
+  margin-bottom: 16px;
+}
+
+.ct-mode-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.ct-mode-tag {
+  font-size: 10px;
+  color: #90A4AE;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ct-mode-val {
+  font-size: 15px;
+  font-weight: 700;
   color: #4A5A6B;
+}
+
+.ct-mode-item.target .ct-mode-val {
+  color: #1976D2;
+}
+
+.ct-mode-arrow {
+  color: #CFD8DC;
+  font-size: 24px !important;
+}
+
+.ct-action-hint {
+  font-size: 13px;
+  color: #7A8896;
+  line-height: 1.4;
   margin: 0;
 }
 
@@ -270,6 +354,24 @@ const confirmPosition = () => {
   color: #757575;
   transform: rotate(25deg);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden; /* For progress bar overlay */
+  cursor: pointer;
+}
+
+.ct-btn-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(76, 175, 80, 0.4);
+  pointer-events: none;
+  transition: height 0.1s linear;
+}
+
+.ct-panel-illus.is-syncing .ct-illus-shell {
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
 }
 
 .ct-illus-btn.mode-btn.active {

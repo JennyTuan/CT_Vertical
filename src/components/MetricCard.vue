@@ -17,11 +17,7 @@
       <span class="ct-card-label">{{ label }}</span>
     </div>
 
-    <div class="ct-card-visual">
-      <div class="ct-visual-bar">
-        <div class="ct-visual-fill" :style="{ width: fillPercent + '%' }"></div>
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -44,10 +40,7 @@ const ICONS: Record<string, string> = {
 
 const customIcon = computed(() => ICONS[props.icon]);
 
-const fillPercent = computed(() => {
-  const num = parseInt(props.value.replace(/[^0-9-]/g, ''));
-  return Math.max(10, Math.min(90, 50 + num / 5));
-});
+
 </script>
 
 <style scoped>
@@ -111,23 +104,5 @@ const fillPercent = computed(() => {
   letter-spacing: 0.1em;
 }
 
-.ct-card-visual {
-  width: 100%;
-  padding: 0 20px;
-}
 
-.ct-visual-bar {
-  width: 100%;
-  height: 6px;
-  background: #ECEFF1;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.ct-visual-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #42A5F5, #1E88E5);
-  border-radius: 3px;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
 </style>

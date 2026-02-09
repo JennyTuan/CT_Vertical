@@ -1,6 +1,6 @@
 <template>
   <aside class="ct-sidebar">
-    <h2 class="ct-sidebar-title">模式设置</h2>
+    <h2 class="ct-sidebar-title">扫描模式</h2>
 
     <button
       class="ct-mode-button"
