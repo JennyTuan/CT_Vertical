@@ -30,7 +30,6 @@ defineProps<{
   border-top: 1px solid #6b85b2;
   display: flex;
   align-items: stretch;
-  box-shadow: 0 -10px 20px rgba(15, 23, 42, 0.25);
 }
 
 .ct-footer-step {

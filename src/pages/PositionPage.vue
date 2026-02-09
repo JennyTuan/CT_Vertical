@@ -172,42 +172,59 @@ const confirmPosition = () => {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 20px;
-  border-radius: 10px;
-  border: none;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 4px;
+  border: 1px solid #B0BEC5;
   background: transparent;
-  color: #6b7280;
-  font-weight: 700;
-  font-size: 13px;
+  color: #546E7A;
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ct-secondary:hover:not(:disabled) {
+  background: rgba(25, 118, 210, 0.04);
+  border-color: #1976D2;
+  color: #1976D2;
 }
 
 .ct-secondary:disabled {
-  color: #d1d5db;
+  color: #B0BEC5;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .ct-primary {
-  padding: 10px 40px;
-  border-radius: 12px;
+  min-height: 48px;
+  padding: 0 48px;
+  border-radius: 4px;
   border: none;
-  font-weight: 700;
-  font-size: 15px;
-  background: #96c496;
-  color: #1e4d1e;
-  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+  font-weight: 600;
+  font-size: 14px;
+  background: #1976D2;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ct-primary:hover:not(:disabled) {
+  background: #1565C0;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
 }
 
 .ct-primary:disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
+  background: #CFD8DC;
+  color: #90A4AE;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-.ct-primary:active {
+.ct-primary:active:not(:disabled) {
   transform: scale(0.98);
 }
 </style>

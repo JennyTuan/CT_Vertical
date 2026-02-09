@@ -62,98 +62,111 @@ const statusText = computed(() => {
 <style scoped>
 .ct-sidebar {
   width: 256px;
-  background: #ffffff;
-  border-right: 1px solid #e5e7eb;
-  padding: 20px;
+  background: #FFFFFF;
+  border-right: 1px solid #CFD8DC;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 .ct-sidebar-title {
-  font-size: 10px;
-  font-weight: 700;
-  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+  color: #78909C;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding: 0 8px 6px;
+  letter-spacing: 0.1em;
+  padding: 0 8px 8px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .ct-mode-button {
   width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  border: 2px solid #f1f5f9;
-  background: #ffffff;
+  min-height: 48px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: 2px solid #CFD8DC;
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 700;
-  font-size: 13px;
-  color: #334155;
+  font-weight: 600;
+  font-size: 14px;
+  color: #455A64;
   transition: all 0.2s ease;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.ct-mode-button:hover:not(.active) {
+  border-color: #90CAF9;
+  background: #E3F2FD;
 }
 
 .ct-mode-button.active {
-  border-color: #1e88e5;
-  background: #eff6ff;
-  box-shadow: 0 6px 16px rgba(30, 136, 229, 0.15);
+  border-color: #1976D2;
+  background: #E3F2FD;
+  color: #1976D2;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
 }
 
 .ct-mode-icon {
   width: 40px;
   height: 40px;
-  border-radius: 12px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f1f5f9;
-  color: #94a3b8;
+  background: #ECEFF1;
+  color: #78909C;
+  flex-shrink: 0;
 }
 
 .ct-mode-button.active .ct-mode-icon {
-  background: #1e88e5;
-  color: #ffffff;
+  background: #1976D2;
+  color: #FFFFFF;
 }
 
 .ct-sync {
   margin-top: auto;
   padding: 12px;
-  border-radius: 10px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #F5F7FA;
+  border: 1px solid #CFD8DC;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #475569;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #546E7A;
+  min-height: 48px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .ct-sync-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #f97316;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ED6C02;
   position: relative;
+  flex-shrink: 0;
 }
 
 .ct-sync-dot.syncing {
-  background: #3b82f6;
+  background: #1976D2;
   animation: pulse 1s infinite;
 }
 
 .ct-sync-dot.matched {
-  background: #22c55e;
+  background: #2E7D32;
 }
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45);
+    box-shadow: 0 0 0 0 rgba(25, 118, 210, 0.5);
   }
   100% {
-    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 10px rgba(25, 118, 210, 0);
   }
 }
 </style>

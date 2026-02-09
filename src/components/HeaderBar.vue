@@ -102,34 +102,36 @@ const dateText = computed(() => {
 
 <style scoped>
 .ct-header {
-  height: 64px;
-  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
-  border-bottom: 2px solid #cbd5e1;
+  height: 70px;
+  background: #E6EAF0;
+  border-bottom: 1px solid #CDD3DB;
   display: flex;
   align-items: center;
   padding: 0 20px;
   gap: 16px;
-  color: #334155;
+  color: #4A5A6B;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 /* Separators */
 .ct-separator {
   width: 1px;
-  height: 36px;
-  background: linear-gradient(to bottom, transparent, #cbd5e1, transparent);
+  height: 44px;
+  background: linear-gradient(to bottom, transparent 0%, #CDD3DB 20%, #CDD3DB 80%, transparent 100%);
   flex-shrink: 0;
+  margin: 0 2px;
 }
 
 .ct-vsep {
   width: 1px;
-  height: 28px;
-  background: #cbd5e1;
-  margin: 0 4px;
+  height: 32px;
+  background: #CDD3DB;
+  margin: 0 8px;
 }
 
 .ct-spacer {
   flex: 1;
-  min-width: 20px;
+  min-width: 16px;
 }
 
 /* Section 1: Patient Info */
@@ -140,43 +142,55 @@ const dateText = computed(() => {
 .ct-patient {
   display: flex;
   align-items: center;
-  padding: 6px 12px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  background: #FFFFFF;
+  border: 1px solid #D5DBE3;
   border-radius: 8px;
-  min-width: 180px;
+  min-height: 52px;
+  min-width: 170px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.ct-patient:hover {
+  border-color: #6A9AC6;
+  box-shadow: 0 2px 4px rgba(106, 154, 198, 0.12);
 }
 
 .ct-avatar {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #6A9AC6 0%, #2B5C8A 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  color: #1e4d94;
-  font-size: 20px;
+  color: #FFFFFF;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(43, 92, 138, 0.2);
 }
 
 .ct-patient-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .ct-patient-name {
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1;
-  color: #0f172a;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #3A4A58;
+  font-family: 'Roboto', sans-serif;
 }
 
 .ct-patient-id {
-  font-size: 9px;
-  color: #64748b;
-  font-weight: 600;
+  font-size: 11px;
+  color: #6B7885;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Section 2: Time Display */
@@ -189,66 +203,75 @@ const dateText = computed(() => {
   flex-direction: column;
   align-items: center;
   min-width: 90px;
+  justify-content: center;
 }
 
 .ct-clock {
   font-size: 26px;
-  font-weight: 800;
-  color: #0f172a;
+  font-weight: 700;
+  color: #3A4A58;
   line-height: 1;
-  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-family: 'Roboto Mono', 'Consolas', monospace;
   letter-spacing: -0.02em;
 }
 
 .ct-date {
   font-size: 10px;
-  font-weight: 700;
-  color: #64748b;
-  margin-top: 2px;
+  font-weight: 500;
+  color: #6B7885;
+  margin-top: 4px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Section 3: Status Icons */
 .ct-status-section {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 0 4px;
+  gap: 8px;
+  padding: 0 8px;
   flex-shrink: 0;
 }
 
 .ct-status-icon {
-  font-size: 20px;
-  color: #64748b;
+  font-size: 24px;
+  color: #6B7885;
   transition: all 0.2s ease;
   cursor: pointer;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
 }
 
 .ct-status-icon:hover {
-  transform: scale(1.1);
+  background: rgba(90, 138, 184, 0.12);
+  transform: scale(1.05);
 }
 
 .ct-status-icon.success { 
-  color: #10b981; 
+  color: #3D8B4E; 
 }
 
 .ct-status-icon.active { 
-  color: #3b82f6; 
+  color: #2B5C8A; 
 }
 
 .ct-status-icon.emergency { 
-  color: #ef4444; 
+  color: #C94848; 
   animation: emergency-pulse 2s infinite ease-in-out;
 }
 
 .ct-status-icon.glow {
-  filter: drop-shadow(0 0 3px currentColor);
+  filter: drop-shadow(0 0 4px currentColor);
 }
 
 @keyframes emergency-pulse {
   0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.15); opacity: 0.7; }
+  50% { transform: scale(1.12); opacity: 0.8; }
 }
 
 /* Section 4: Settings */
@@ -257,14 +280,21 @@ const dateText = computed(() => {
 }
 
 .ct-settings-icon {
-  font-size: 20px;
-  color: #64748b;
+  font-size: 24px;
+  color: #6B7885;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
 }
 
 .ct-settings-icon:hover {
-  color: #1e293b;
+  color: #2B5C8A;
+  background: rgba(106, 154, 198, 0.1);
   transform: rotate(90deg);
 }
 
@@ -272,12 +302,20 @@ const dateText = computed(() => {
 .ct-metrics-section {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #FFFFFF;
+  border: 1px solid #D5DBE3;
   border-radius: 8px;
   flex-shrink: 0;
+  min-height: 52px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.ct-metrics-section:hover {
+  border-color: #6A9AC6;
+  box-shadow: 0 2px 4px rgba(106, 154, 198, 0.12);
 }
 
 .ct-metrics-column {
@@ -291,32 +329,38 @@ const dateText = computed(() => {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
+  min-height: 20px;
 }
 
 .ct-metric-icon {
-  font-size: 14px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #7A8896;
   flex-shrink: 0;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ct-metric-icon.thermal { color: #f97316; }
-.ct-metric-icon.battery { color: #10b981; }
+.ct-metric-icon.thermal { color: #D68534; }
+.ct-metric-icon.battery { color: #3D8B4E; }
 
 .ct-metric-value {
-  color: #0f172a;
-  font-weight: 800;
-  min-width: 42px;
+  color: #3A4A58;
+  font-weight: 700;
+  min-width: 40px;
   text-align: right;
-  font-family: 'JetBrains Mono', 'Consolas', monospace;
-  font-size: 13px;
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+  font-size: 12px;
 }
 
 .ct-metric-unit {
   font-size: 10px;
-  color: #94a3b8;
-  font-weight: 700;
-  width: 22px;
+  color: #6B7885;
+  font-weight: 500;
+  width: 20px;
   text-align: left;
+  font-family: 'Roboto', sans-serif;
 }
 </style>
