@@ -40,45 +40,44 @@
               <p>请按住面板上的高亮按钮，直到设备完全切换至 <span class="text-primary font-weight-bold">【{{ targetLabel }}模式】</span></p>
             </div>
 
-            <!-- More Compact Physical Panel Illustration -->
-            <div class="ct-panel-illus small">
-              <div class="ct-illus-frame">
-                <!-- Top Button -->
-                <div class="ct-illus-btn-top">Inactive</div>
+            <!-- Realistic Physical Panel Illustration -->
+            <div class="ct-panel-illus side-style">
+              <div class="ct-illus-shell">
+                <div class="ct-illus-sensor"></div>
                 
-                <!-- Mode Switch -->
-                <div class="ct-illus-mode-switch">
+                <!-- Group 1: Mode Switch (Dark Capsule) -->
+                <div class="ct-illus-group-capsule">
                   <div 
-                    class="ct-illus-btn horizontal" 
+                    class="ct-illus-btn mode-btn horizontal" 
                     :class="{ active: targetMode === SCAN_MODES.HORIZONTAL }"
                   >
-                    <v-icon icon="mdi-circle-outline" size="18" />
+                    <v-icon icon="mdi-rectangle-outline" size="16" />
                   </div>
                   <div 
-                    class="ct-illus-btn vertical" 
+                    class="ct-illus-btn mode-btn vertical" 
                     :class="{ active: targetMode === SCAN_MODES.VERTICAL }"
                   >
-                    <v-icon icon="mdi-rectangle-outline" size="18" />
+                    <v-icon icon="mdi-rectangle-outline" size="16" />
                   </div>
                 </div>
 
-                <!-- D-Pad -->
-                <div class="ct-illus-dpad">
-                  <v-icon icon="mdi-menu-up" size="18" />
-                  <div class="ct-illus-dpad-center">
+                <!-- Group 2: D-Pad (Cross Style) -->
+                <div class="ct-illus-group-cross">
+                  <div class="ct-cross-v">
+                    <v-icon icon="mdi-menu-up" size="18" />
+                    <v-icon icon="mdi-menu-down" size="18" />
+                  </div>
+                  <div class="ct-cross-h">
                     <v-icon icon="mdi-menu-left" size="18" />
-                    <v-icon icon="mdi-circle-small" size="16" />
+                    <div class="ct-pill-icon"></div>
                     <v-icon icon="mdi-menu-right" size="18" />
                   </div>
-                  <v-icon icon="mdi-menu-down" size="18" />
                 </div>
 
-                <!-- Bottom Fine Adjustment -->
-                <div class="ct-illus-fine">
+                <!-- Group 3: Fine Adjust (Light Capsule) -->
+                <div class="ct-illus-group-fine">
                   <v-icon icon="mdi-minus" size="14" />
-                  <div class="ct-illus-fine-center">
-                    <v-icon icon="mdi-tune-vertical" size="14" />
-                  </div>
+                  <div class="ct-pill-icon small"></div>
                   <v-icon icon="mdi-plus" size="14" />
                 </div>
               </div>
@@ -225,107 +224,122 @@ const confirmPosition = () => {
   letter-spacing: 0.05em;
 }
 
-/* Compact Illustration */
-.ct-panel-illus.small .ct-illus-frame {
-  width: 120px;
-  background: #B0BEC5;
-  padding: 16px 8px;
-  border-radius: 50px 50px 15px 15px;
-  border: 3px solid #78909C;
+/* Realistic Illustration Styles */
+.ct-panel-illus.side-style .ct-illus-shell {
+  width: 140px;
+  background: #EDF0F4;
+  padding: 24px 12px;
+  border-radius: 40px 40px 20px 80px; /* Ergonomic wavy profile */
+  border: 2px solid #CDD3DB;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  gap: 16px;
+  position: relative;
+  box-shadow: inset -2px 0 5px rgba(0,0,0,0.05);
 }
 
-.ct-illus-btn-top {
-  width: 64px;
-  height: 64px;
+.ct-illus-sensor {
+  width: 6px;
+  height: 6px;
+  background: #78909C;
   border-radius: 50%;
-  background: #CFD8DC;
-  border: 4px solid #90A4AE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  color: #546E7A;
+  margin: 0 auto 10px;
 }
 
-.ct-panel-illus.small .ct-illus-mode-switch {
-  width: 90px;
-  height: 48px;
-  background: #90A4AE;
-  border-radius: 24px;
-  transform: rotate(-25deg);
+/* Mode Capsule (Dark) */
+.ct-illus-group-capsule {
+  width: 100px;
+  background: #757575;
+  padding: 6px;
+  border-radius: 30px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 4px;
+  transform: rotate(-25deg);
+  margin: 0 auto;
 }
 
-.ct-panel-illus.small .ct-illus-btn {
-  width: 36px;
-  height: 36px;
-  background: #FFFFFF;
+.ct-illus-btn.mode-btn {
+  width: 40px;
+  height: 40px;
+  background: #F5F5F5;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #757575;
   transform: rotate(25deg);
-  color: #4A5A6B;
+  transition: all 0.3s ease;
 }
 
-.ct-panel-illus.small .ct-illus-btn.active {
+.ct-illus-btn.mode-btn.active {
   background: #B7E28E;
-  box-shadow: 0 0 12px #B7E28E;
-  border: 2px solid #FFFFFF;
   color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(183, 226, 142, 0.8);
+  border: 2px solid #FFFFFF;
 }
 
-.ct-illus-dpad {
-  width: 80px;
-  height: 80px;
-  background: #CFD8DC;
-  border-radius: 50%;
-  border: 2px solid #90A4AE;
+/* Cross Pad */
+.ct-illus-group-cross {
+  width: 110px;
+  height: 110px;
+  position: relative;
+  margin: 10px auto;
+}
+
+.ct-cross-v {
+  position: absolute;
+  top: 0; left: 35px;
+  width: 40px; height: 110px;
+  background: #FFFFFF;
+  border: 1px solid #CDD3DB;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #546E7A;
+  justify-content: space-between;
+  padding: 5px 0;
+  color: #BBDEFB;
 }
 
-.ct-illus-dpad-center {
+.ct-cross-h {
+  position: absolute;
+  top: 35px; left: 0;
+  width: 110px; height: 40px;
+  background: #757575;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  gap: 4px;
-}
-
-.ct-illus-fine {
-  width: 80px;
-  height: 32px;
-  background: #E0E0E0;
-  border-radius: 16px;
-  border: 2px solid #90A4AE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: #546E7A;
-}
-
-.ct-illus-fine-center {
-  width: 24px;
-  height: 24px;
-  background: #90A4AE;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 5px;
   color: #FFFFFF;
+  z-index: 2;
+}
+
+.ct-pill-icon {
+  width: 12px;
+  height: 24px;
+  background: #FFFFFF;
+  border-radius: 6px;
+}
+
+.ct-pill-icon.small {
+  width: 10px;
+  height: 18px;
+  background: #757575;
+}
+
+/* Fine Adjust (Light) */
+.ct-illus-group-fine {
+  width: 100px;
+  background: #FFFFFF;
+  border: 1px solid #CDD3DB;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  color: #757575;
 }
 
 .ct-guide-debug-btn {
