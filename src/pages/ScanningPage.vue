@@ -18,11 +18,11 @@
     <div class="ct-action-bar">
       <button class="ct-secondary" :disabled="currentStep === 'position'" @click="goBack">
         <v-icon size="18" icon="mdi-chevron-left" />
-        <span>杩斿洖</span>
+        <span>返回</span>
       </button>
 
       <button class="ct-primary" :disabled="!isMatched" @click="confirmPosition">
-        纭浣嶇疆
+        确认位置
       </button>
     </div>
   </MainLayout>

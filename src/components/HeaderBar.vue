@@ -5,31 +5,24 @@
         <v-icon size="20" icon="mdi-account" />
       </div>
       <div class="ct-patient-info">
-        <div class="ct-patient-name">娆ч槼绁栧崕</div>
+        <div class="ct-patient-name">欧阳祖华</div>
         <div class="ct-progress"></div>
       </div>
     </div>
 
     <div class="ct-time">
       <div class="ct-clock">{{ timeText }}</div>
-      <div class="ct-date">3鏈?鏃?鍛ㄦ棩</div>
+      <div class="ct-date">3月12日 周日</div>
     </div>
 
-    <div class="ct-status">
-      <div class="ct-status-main">鎬ヨ瘖鎮ｈ€?/div>
-      <div class="ct-status-sub">ID:00058 | 170cm</div>
-    </div>
-
-    <div class="ct-indicators">
-      <div class="ct-indicator">
-        <v-icon size="18" icon="mdi-bell" class="ct-accent" />
-        <span>鎬ヨ瘖</span>
-      </div>
-      <div class="ct-divider"></div>
+    <div class="ct-icons">
       <v-icon size="18" icon="mdi-database" class="ct-muted" />
       <v-icon size="18" icon="mdi-lan" class="ct-muted" />
-      <v-icon size="18" icon="mdi-bell" class="ct-muted" />
-      <v-icon size="18" icon="mdi-white-balance-sunny" class="ct-muted" />
+      <div class="ct-indicator">
+        <v-icon size="18" icon="mdi-alert-circle-outline" class="ct-accent" />
+        <span>急诊</span>
+      </div>
+      <v-icon size="18" icon="mdi-laser-pointer" class="ct-muted" />
       <v-icon size="18" icon="mdi-cog" class="ct-muted" />
     </div>
 
@@ -52,11 +45,11 @@
 
     <div class="ct-hw-metrics">
       <div class="ct-hw-metric">
-        <v-icon size="14" icon="mdi-rotate-left" />
+        <v-icon size="14" icon="mdi-arrow-left-right" />
         <span>112</span>
       </div>
       <div class="ct-hw-metric">
-        <v-icon size="14" icon="mdi-arrow-up" />
+        <v-icon size="14" icon="mdi-angle-acute" />
         <span>112</span>
       </div>
     </div>
@@ -95,6 +88,7 @@ const timeText = computed(() =>
   border: 1px solid #b0b8c4;
   border-radius: 2px;
   min-width: 160px;
+  flex-shrink: 0;
 }
 
 .ct-avatar {
@@ -128,6 +122,7 @@ const timeText = computed(() =>
   align-items: center;
   padding-right: 16px;
   border-right: 1px solid #bcc4d0;
+  flex-shrink: 0;
 }
 
 .ct-clock {
@@ -145,29 +140,17 @@ const timeText = computed(() =>
   margin-top: 2px;
 }
 
-.ct-status {
-  display: flex;
-  flex-direction: column;
-  font-size: 10px;
-  line-height: 1.2;
-  padding-right: 16px;
-}
-
-.ct-status-main {
-  font-weight: 700;
-  color: #1e4d94;
-}
-
-.ct-status-sub {
-  opacity: 0.7;
-}
-
-.ct-indicators {
+.ct-icons {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-size: 9px;
   font-weight: 700;
+  min-width: 260px;
+}
+
+.ct-icons > * {
+  flex-shrink: 0;
 }
 
 .ct-indicator {
@@ -187,12 +170,6 @@ const timeText = computed(() =>
   cursor: pointer;
 }
 
-.ct-divider {
-  width: 1px;
-  height: 24px;
-  background: #bcc4d0;
-}
-
 .ct-spacer {
   flex: 1;
 }
@@ -203,6 +180,7 @@ const timeText = computed(() =>
   gap: 4px;
   padding: 0 16px;
   border-left: 1px solid #bcc4d0;
+  flex-shrink: 0;
 }
 
 .ct-hw-item {
@@ -241,6 +219,7 @@ const timeText = computed(() =>
   font-size: 12px;
   font-weight: 700;
   opacity: 0.8;
+  flex-shrink: 0;
 }
 
 .ct-hw-metric {

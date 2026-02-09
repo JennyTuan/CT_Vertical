@@ -1,6 +1,6 @@
 <template>
   <aside class="ct-sidebar">
-    <h2 class="ct-sidebar-title">妯″紡璁剧疆</h2>
+    <h2 class="ct-sidebar-title">模式设置</h2>
 
     <button
       class="ct-mode-button"
@@ -10,7 +10,7 @@
       <div class="ct-mode-icon">
         <v-icon size="24" icon="mdi-view-dashboard" />
       </div>
-      <span>姘村钩鎵弿妯″紡</span>
+      <span>水平扫描模式</span>
     </button>
 
     <button
@@ -21,7 +21,7 @@
       <div class="ct-mode-icon">
         <v-icon size="24" icon="mdi-pulse" />
       </div>
-      <span>鍨傜洿鎵弿妯″紡</span>
+      <span>垂直扫描模式</span>
     </button>
 
     <div class="ct-sync">
@@ -53,9 +53,9 @@ const syncClass = computed(() => ({
 }));
 
 const statusText = computed(() => {
-  if (props.isSyncing) return '鍚屾涓?..';
-  if (props.isMatched) return '纭欢宸查攣瀹氬氨缁?';
-  return '妯″紡涓嶄竴鑷?';
+  if (props.isSyncing) return '同步中...';
+  if (props.isMatched) return '硬件已锁定就绪';
+  return '模式不一致';
 });
 </script>
 

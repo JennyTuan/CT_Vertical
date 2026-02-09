@@ -7,7 +7,7 @@
       :class="{ active: currentStep === step.id }"
     >
       <div class="ct-footer-icon">
-        <v-icon size="16" :icon="step.icon" />
+        <v-icon size="16" :icon="step.icon || 'mdi-circle-outline'" />
       </div>
       <span class="ct-footer-label">{{ step.label }}</span>
     </div>

@@ -2,7 +2,7 @@
   <div class="ct-card">
     <div class="ct-card-top">
       <span class="ct-card-label">{{ label }}</span>
-      <v-icon size="24" :icon="icon" class="ct-card-icon" />
+      <v-icon size="24" :icon="iconName" class="ct-card-icon" />
     </div>
     <div class="ct-card-value">{{ value }}</div>
     <div class="ct-card-bar">
@@ -12,11 +12,15 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import { computed } from 'vue';
+
+const props = defineProps<{
   label: string;
   value: string;
   icon: string;
 }>();
+
+const iconName = computed(() => props.icon || 'mdi-circle-outline');
 </script>
 
 <style scoped>
