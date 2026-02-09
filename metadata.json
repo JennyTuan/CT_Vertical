@@ -1,0 +1,5 @@
+{
+  "name": "CT Control Interface",
+  "description": "A production-ready CT scanning control interface with modular React components and Tailwind styling.",
+  "requestFramePermissions": []
+}
