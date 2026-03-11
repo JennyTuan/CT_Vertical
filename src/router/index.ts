@@ -1,13 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router';
+﻿import { createRouter, createWebHistory } from 'vue-router';
 import WelcomePage from '@/pages/WelcomePage.vue';
 import PositionPage from '@/pages/PositionPage.vue';
 import ScanningPage from '@/pages/ScanningPage.vue';
+import FigmaPositionView from '@/views/FigmaPositionView.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'welcome', component: WelcomePage },
     { path: '/position', name: 'position', component: PositionPage },
+    { path: '/figma-position', name: 'figma-position', component: FigmaPositionView },
     { path: '/scanning', name: 'scanning', component: ScanningPage },
   ],
 });

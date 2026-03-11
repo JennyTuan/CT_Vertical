@@ -1,34 +1,27 @@
 /**
  * Medical Tablet Client (1024x768) - Global Styles
- * Based on legacy software color scheme
+ * Optimized for the new UI design (#C8CED8, #7e9dd2)
  */
 
 :root {
   color-scheme: light;
 
-  /* Legacy Color Tokens - Lighter Palette */
-  --medical-primary: #2B5C8A;
-  --medical-primary-dark: #1E4470;
-  --medical-bg-light: #EDF0F4;
+  /* New UI Color Tokens */
+  --header-bg: #C8CED8;
+  --sidebar-bg: #F7F9FC;
+  --content-bg: #EDF0F4;
+  --accent-color: #7e9dd2;
+  --accent-dark: #6485C1;
+  
   --medical-surface: #FFFFFF;
-  --medical-header-bg: #C1C5D5;
-  --medical-error: #C94848;
-  --medical-success: #3D8B4E;
-  --medical-warning: #D68534;
-  --medical-text-main: #263238;
-  --medical-text-secondary: #546E7A;
   --medical-border: #CDD3DB;
+  --medical-text-main: #2D3748;
+  --medical-text-secondary: #7A8896;
 
-  /* Touch & Spacing */
-  --touch-target-min: 48px;
-  --spacer-base: 4px;
-
-  /* Modern Finishes */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 12px rgba(43, 92, 138, 0.08);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -37,12 +30,11 @@
 
 body {
   margin: 0;
-  background: var(--medical-bg-light);
-  font-family: 'Roboto', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  font-size: 16px;
+  background: var(--content-bg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px; /* Reduced from 14px */
   color: var(--medical-text-main);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
 
@@ -54,85 +46,41 @@ body {
   width: 1024px;
   height: 768px;
   margin: 0 auto;
-  background: var(--medical-bg-light);
+  background: var(--content-bg);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
 .ct-body {
   flex: 1;
   display: flex;
   overflow: hidden;
+  min-height: 0; /* Critical for nested flex layouts to shrink */
 }
 
 .ct-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: var(--medical-bg-light);
-  position: relative;
-}
-
-.ct-action-bar {
-  min-height: 72px;
-  height: 72px;
-  border-top: 2px solid var(--medical-border);
-  background: var(--medical-surface);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.04);
-  z-index: 100;
-}
-
-.ct-section {
-  flex: 1;
   overflow: hidden;
+  min-height: 0;
 }
 
-/* Global Transitions */
-.slide-fade-enter-active, .slide-fade-leave-active {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Common Medical UI Elements */
-.medical-btn {
-  min-height: var(--touch-target-min);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 24px;
-  border-radius: var(--radius-md);
-  font-weight: 700;
+button {
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
+  transition: all 0.2s ease;
   font-family: inherit;
+  border: none;
+  outline: none;
 }
 
-.medical-btn:active {
-  transform: scale(0.97);
+button:active {
+  transform: scale(0.96);
 }
 
-.medical-card {
-  border: 1px solid var(--medical-border);
-  background-color: var(--medical-surface);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-md);
-}
-
-/* Grid Layouts */
-.ct-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.ct-grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+.font-mono {
+  font-family: 'Roboto Mono', 'Consolas', monospace !important;
 }

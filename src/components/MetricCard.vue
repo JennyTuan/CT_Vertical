@@ -1,20 +1,40 @@
 <template>
-  <div class="ct-card">
-    <div class="ct-card-icon-container">
-      <svg
-        v-if="customIcon"
-        viewBox="0 0 24 24"
-        class="ct-custom-icon"
-        fill="currentColor"
-      >
-        <path :d="customIcon" />
-      </svg>
-      <v-icon v-else size="28" :icon="icon" class="ct-card-icon" />
+  <div class="ct-card group">
+    <div class="ct-card-top">
+      <div class="ct-card-icon-box">
+        <svg
+          v-if="customIcon"
+          viewBox="0 0 24 24"
+          class="ct-custom-icon"
+          fill="currentColor"
+        >
+          <path :d="customIcon" />
+        </svg>
+        <v-icon v-else size="16" :icon="icon" />
+      </div>
+      <div class="ct-card-spacer"></div>
     </div>
-    
-    <div class="ct-card-content">
-      <span class="ct-card-value">{{ value }}</span>
-      <span class="ct-card-label">{{ label }}</span>
+
+    <div class="ct-card-main">
+      <span class="ct-card-value font-mono">{{ value }}</span>
+      <div class="ct-card-label-box">
+        <span class="ct-card-label">{{ label }}</span>
+      </div>
+    </div>
+
+    <!-- Data Progress Bar Section -->
+    <div class="ct-card-footer">
+      <div class="ct-progress-labels">
+        <span>Limit Min</span>
+        <span class="ct-feed-tag">Real-time Feed</span>
+        <span>Limit Max</span>
+      </div>
+      <div class="ct-progress-track">
+        <div 
+          class="ct-progress-fill"
+          :style="{ width: progressPercent + '%' }"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +48,15 @@ const props = defineProps<{
   icon: string;
 }>();
 
-// Motion icons based on the provided reference images
+// Static percentages for visual effect as per mockup
+const progressPercent = computed(() => {
+  if (props.label.includes('横移')) return 65;
+  if (props.label.includes('机架高度')) return 40;
+  if (props.label.includes('机架倾斜')) return 30;
+  if (props.label.includes('扫描环角度')) return 85;
+  return 50;
+});
+
 const ICONS: Record<string, string> = {
   'move-h': 'M2,12L5,9V11H19V9L22,12L19,15V13H5V15L2,12M11,4H13V10H11V4M11,14H13V20H11V14Z',
   'move-v': 'M12,2L15,5H13V19H15L12,22L9,19H11V5H9L12,2M4,11H10V13H4V11M14,11H20V13H14V11Z',
@@ -41,79 +69,119 @@ const customIcon = computed(() => ICONS[props.icon]);
 
 <style scoped>
 .ct-card {
-  background: #FFFFFF;
-  border-radius: 10px;
-  border: 1px solid #DDE2EA;
-  border-top: 3px solid #7094BA;
-  padding: 20px 18px 18px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(209, 217, 228, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  box-shadow: 0 2px 10px rgba(43, 92, 138, 0.07), 0 1px 3px rgba(0,0,0,0.04);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: space-between;
+  transition: all 0.3s ease;
   height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.ct-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, rgba(112, 148, 186, 0.04) 0%, transparent 60%);
-  pointer-events: none;
 }
 
 .ct-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(43, 92, 138, 0.13), 0 2px 6px rgba(0,0,0,0.05);
-  border-top-color: #2B5C8A;
-  border-color: #B8C5D6;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  border-color: rgba(126, 157, 210, 0.2);
 }
 
-.ct-card-icon-container {
-  width: 48px;
-  height: 48px;
+.ct-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ct-card-icon-box {
+  padding: 6px;
+  background: #F1F5F9;
+  border-radius: 8px;
+  border: 1px solid #F1F5F9;
+  color: #6485C1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #EDF2F7;
-  border-radius: 10px;
-  border: 1px solid #DDE2EA;
-  color: #5A7FA8;
 }
 
 .ct-custom-icon {
-  width: 32px;
-  height: 32px;
+  width: 16px;
+  height: 16px;
 }
 
-.ct-card-content {
+.ct-card-spacer {
+  width: 40px;
+  height: 2px;
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 99px;
+  margin-top: 4px;
+}
+
+.ct-card-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  text-align: center;
+  justify-content: center;
+  padding: 4px 0;
 }
 
 .ct-card-value {
-  font-size: 56px;
-  font-weight: 800;
-  color: #1E2D3D;
+  font-size: 48px; /* Reduced from 60px */
+  font-weight: 900;
+  color: #2D3748;
   line-height: 1;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
+}
+
+.ct-card-label-box {
+  margin-top: 8px;
+  padding: 2px 12px;
+  background: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  border-radius: 99px;
 }
 
 .ct-card-label {
-  font-size: 10px;
-  font-weight: 700;
-  color: #6B7F96;
+  font-size: 9px;
+  font-weight: 800;
+  color: #94A3B8;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: #EDF2F7;
-  padding: 3px 8px;
-  border-radius: 4px;
+  letter-spacing: 0.12em;
+}
+
+/* Footer & Progress Bar */
+.ct-card-footer {
+  margin-top: 8px;
+}
+
+.ct-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  font-weight: 900;
+  color: #CBD5E1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+
+.ct-feed-tag {
+  color: rgba(126, 157, 210, 0.4);
+  letter-spacing: 0.15em;
+}
+
+.ct-progress-track {
+  height: 4px; /* Reduced from 6px */
+  background: #F1F5F9;
+  border-radius: 99px;
+  padding: 1px;
+  border: 1px solid rgba(226, 232, 240, 0.4);
+  overflow: hidden;
+}
+
+.ct-progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #7e9dd2, #6485C1);
+  border-radius: 99px;
 }
 </style>

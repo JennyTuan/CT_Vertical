@@ -2,37 +2,48 @@
   <aside class="ct-sidebar">
     <h2 class="ct-sidebar-title">扫描模式</h2>
 
-    <button
-      class="ct-mode-button"
-      :class="{ active: targetMode === SCAN_MODES.HORIZONTAL }"
-      @click="emit('update:targetMode', SCAN_MODES.HORIZONTAL)"
-    >
-      <div class="ct-mode-icon">
-        <v-icon size="20" icon="mdi-view-dashboard" />
-      </div>
-      <span>水平扫描模式</span>
-    </button>
+    <div class="ct-mode-stack">
+      <button
+        class="ct-mode-btn"
+        :class="{ active: targetMode === SCAN_MODES.HORIZONTAL }"
+        @click="emit('update:targetMode', SCAN_MODES.HORIZONTAL)"
+      >
+        <div class="ct-icon-box" :class="{ active: targetMode === SCAN_MODES.HORIZONTAL }">
+          <v-icon size="20" icon="mdi-view-dashboard-outline" />
+        </div>
+        <div class="ct-btn-label">
+          <span class="ct-status-tag" :class="{ active: targetMode === SCAN_MODES.HORIZONTAL }">STATUS: OK</span>
+          <span class="ct-mode-name">水平扫描模式</span>
+        </div>
+      </button>
 
-    <button
-      class="ct-mode-button"
-      :class="{ active: targetMode === SCAN_MODES.VERTICAL }"
-      @click="emit('update:targetMode', SCAN_MODES.VERTICAL)"
-    >
-      <div class="ct-mode-icon">
-        <v-icon size="20" icon="mdi-pulse" />
-      </div>
-      <span>垂直扫描模式</span>
-    </button>
+      <button
+        class="ct-mode-btn"
+        :class="{ active: targetMode === SCAN_MODES.VERTICAL }"
+        @click="emit('update:targetMode', SCAN_MODES.VERTICAL)"
+      >
+        <div class="ct-icon-box" :class="{ active: targetMode === SCAN_MODES.VERTICAL }">
+          <v-icon size="20" icon="mdi-pulse" />
+        </div>
+        <div class="ct-btn-label">
+          <span class="ct-status-tag" :class="{ active: targetMode === SCAN_MODES.VERTICAL }">STATUS: OK</span>
+          <span class="ct-mode-name">垂直扫描模式</span>
+        </div>
+      </button>
+    </div>
 
-    <div class="ct-sync" :class="syncClass">
-      <div class="ct-sync-dot" :class="syncClass"></div>
-      <span>{{ statusText }}</span>
+    <!-- System Ready Tag at bottom -->
+    <div class="ct-system-tag">
+      <div class="ct-status-dot-container">
+        <div class="ct-status-dot"></div>
+        <div class="ct-status-dot-ping"></div>
+      </div>
+      <span class="ct-ready-text">System Ready</span>
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { SCAN_MODES } from '@/constants/scan';
 import type { ScanMode } from '@/types/scan';
 
@@ -45,144 +56,144 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'update:targetMode', value: ScanMode): void;
 }>();
-
-const syncClass = computed(() => ({
-  syncing: props.isSyncing,
-  matched: props.isMatched && !props.isSyncing,
-  mismatch: !props.isMatched && !props.isSyncing,
-}));
-
-const statusText = computed(() => {
-  if (props.isSyncing) return '同步中...';
-  if (props.isMatched) return '硬件已锁定就绪';
-  return '模式不一致';
-});
 </script>
 
 <style scoped>
 .ct-sidebar {
-  width: 256px;
-  background: #F5F7FA;
-  border-right: 1px solid #CDD3DB;
-  padding: 16px 14px;
+  width: 200px; /* Reduced from 220px */
+  background: #F7F9FC;
+  border-right: 1px solid #E2E8F0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.01);
+  z-index: 40;
+}
+
+.ct-sidebar-title {
+  font-size: 9px;
+  font-weight: 900;
+  color: #8A9EB5;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 4px 4px 12px;
+}
+
+.ct-mode-stack {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.ct-sidebar-title {
-  font-size: 10px;
-  font-weight: 700;
-  color: #8A9BB0;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 0 6px 6px;
-  font-family: 'Roboto', sans-serif;
-  border-bottom: 1px solid #DDE2EA;
-  margin-bottom: 2px;
-}
-
-.ct-mode-button {
+.ct-mode-btn {
   width: 100%;
-  min-height: 52px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1.5px solid #D0D9E4;
-  background: #FFFFFF;
+  padding: 10px; /* Reduced from 12px */
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #4A5A6B;
+  gap: 10px;
   transition: all 0.2s ease;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
-.ct-mode-button:hover:not(.active) {
-  border-color: #8AAFCE;
-  background: #EEF4FA;
-  box-shadow: 0 2px 6px rgba(43, 92, 138, 0.08);
+.ct-mode-btn.active {
+  background: #FFFFFF;
+  border-color: #7e9dd2;
+  box-shadow: 0 4px 12px rgba(126, 157, 210, 0.15);
 }
 
-.ct-mode-button.active {
-  border-color: #2B5C8A;
-  background: #EEF4FA;
-  color: #2B5C8A;
-  box-shadow: 0 2px 8px rgba(43, 92, 138, 0.15), inset 0 0 0 1px rgba(43, 92, 138, 0.1);
-}
-
-.ct-mode-icon {
+.ct-icon-box {
   width: 36px;
   height: 36px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #EDF2F7;
-  color: #7094BA;
+  background: #E2E8F0;
+  color: #94A3B8;
   flex-shrink: 0;
-  border: 1px solid #DDE2EA;
-  transition: all 0.2s ease;
 }
 
-.ct-mode-button.active .ct-mode-icon {
-  background: #2B5C8A;
+.ct-icon-box.active {
+  background: #7e9dd2;
   color: #FFFFFF;
-  border-color: #1E4470;
 }
 
-.ct-sync {
+.ct-btn-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.ct-status-tag {
+  font-size: 8px;
+  font-weight: 900;
+  color: #CBD5E1;
+}
+
+.ct-status-tag.active {
+  color: #7e9dd2;
+}
+
+.ct-mode-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748B;
+}
+
+.ct-mode-btn.active .ct-mode-name {
+  color: #1E293B;
+}
+
+.ct-system-tag {
   margin-top: auto;
-  padding: 10px 12px;
+  background: #FFFFFF;
   border-radius: 8px;
-  background: #FFF8F0;
-  border: 1px solid #F0C090;
+  padding: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #7A5A30;
-  min-height: 44px;
-  font-family: 'Roboto', sans-serif;
-  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-.ct-sync.syncing {
-  background: #EEF4FA;
-  border-color: #90B8D8;
-  color: #2B5C8A;
-}
-
-.ct-sync.matched {
-  background: #F0FAF2;
-  border-color: #90CCA0;
-  color: #2E7D32;
-}
-
-.ct-sync-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #D68534;
+.ct-status-dot-container {
   position: relative;
-  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
 }
 
-.ct-sync-dot.syncing {
-  background: #2B5C8A;
-  animation: pulse 1s infinite;
+.ct-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
 }
 
-.ct-sync-dot.matched {
-  background: #2E7D32;
+.ct-status-dot-ping {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  opacity: 0.3;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(43, 92, 138, 0.5); }
-  100% { box-shadow: 0 0 0 8px rgba(43, 92, 138, 0); }
+@keyframes ping {
+  75%, 100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.ct-ready-text {
+  font-size: 9px;
+  font-weight: 900;
+  color: #059669;
+  text-transform: uppercase;
 }
 </style>
