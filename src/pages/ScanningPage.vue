@@ -22,7 +22,7 @@
       </button>
 
       <button class="ct-primary" :disabled="!isMatched" @click="confirmPosition">
-        确认位置
+        患者列表
       </button>
     </div>
   </MainLayout>

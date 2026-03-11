@@ -95,43 +95,42 @@ const dateText = computed(() => {
     weekday: 'short' 
   };
   const str = props.time.toLocaleDateString('zh-CN', options);
-  // Optional: replace "周x" with "星期x" or keep it short
   return str;
 });
 </script>
 
 <style scoped>
 .ct-header {
-  height: 70px;
-  background: #E6EAF0;
-  border-bottom: 1px solid #CDD3DB;
+  height: 68px;
+  background: linear-gradient(180deg, #C8CCDC 0%, #B8BDD0 100%);
+  border-bottom: 2px solid #A8B0C4;
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  gap: 16px;
+  padding: 0 16px;
+  gap: 12px;
   color: #4A5A6B;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 /* Separators */
 .ct-separator {
   width: 1px;
-  height: 44px;
-  background: linear-gradient(to bottom, transparent 0%, #CDD3DB 20%, #CDD3DB 80%, transparent 100%);
+  height: 40px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(100,115,140,0.4) 25%, rgba(100,115,140,0.4) 75%, transparent 100%);
   flex-shrink: 0;
   margin: 0 2px;
 }
 
 .ct-vsep {
   width: 1px;
-  height: 32px;
-  background: #CDD3DB;
-  margin: 0 8px;
+  height: 28px;
+  background: #C0C8D8;
+  margin: 0 6px;
 }
 
 .ct-spacer {
   flex: 1;
-  min-width: 16px;
+  min-width: 8px;
 }
 
 /* Section 1: Patient Info */
@@ -142,24 +141,25 @@ const dateText = computed(() => {
 .ct-patient {
   display: flex;
   align-items: center;
-  padding: 8px 12px;
-  background: #FFFFFF;
-  border: 1px solid #D5DBE3;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(180, 195, 215, 0.8);
   border-radius: 8px;
-  min-height: 52px;
+  min-height: 48px;
   min-width: 170px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8);
   transition: all 0.2s ease;
 }
 
 .ct-patient:hover {
-  border-color: #6A9AC6;
-  box-shadow: 0 2px 4px rgba(106, 154, 198, 0.12);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #8AAFCE;
+  box-shadow: 0 2px 6px rgba(43, 92, 138, 0.12);
 }
 
 .ct-avatar {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   background: linear-gradient(135deg, #6A9AC6 0%, #2B5C8A 100%);
   border-radius: 50%;
   display: flex;
@@ -167,27 +167,27 @@ const dateText = computed(() => {
   justify-content: center;
   margin-right: 10px;
   color: #FFFFFF;
-  font-size: 22px;
+  font-size: 20px;
   flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(43, 92, 138, 0.2);
+  box-shadow: 0 2px 4px rgba(43, 92, 138, 0.25);
 }
 
 .ct-patient-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .ct-patient-name {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   line-height: 1.2;
-  color: #3A4A58;
+  color: #2A3A4A;
   font-family: 'Roboto', sans-serif;
 }
 
 .ct-patient-id {
-  font-size: 11px;
+  font-size: 10px;
   color: #6B7885;
   font-weight: 400;
   font-family: 'Roboto', sans-serif;
@@ -202,26 +202,26 @@ const dateText = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 90px;
+  min-width: 84px;
   justify-content: center;
 }
 
 .ct-clock {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
-  color: #3A4A58;
+  color: #2A3A4A;
   line-height: 1;
   font-family: 'Roboto Mono', 'Consolas', monospace;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
 .ct-date {
   font-size: 10px;
   font-weight: 500;
-  color: #6B7885;
+  color: #5A6878;
   margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -229,18 +229,18 @@ const dateText = computed(() => {
 .ct-status-section {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 8px;
+  gap: 2px;
+  padding: 0 4px;
   flex-shrink: 0;
 }
 
 .ct-status-icon {
-  font-size: 24px;
+  font-size: 22px;
   color: #6B7885;
   transition: all 0.2s ease;
   cursor: pointer;
-  min-width: 48px;
-  min-height: 48px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,7 +248,7 @@ const dateText = computed(() => {
 }
 
 .ct-status-icon:hover {
-  background: rgba(90, 138, 184, 0.12);
+  background: rgba(255, 255, 255, 0.3);
   transform: scale(1.05);
 }
 
@@ -280,12 +280,12 @@ const dateText = computed(() => {
 }
 
 .ct-settings-icon {
-  font-size: 24px;
-  color: #6B7885;
+  font-size: 22px;
+  color: #5A6878;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 48px;
-  min-height: 48px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,7 +294,7 @@ const dateText = computed(() => {
 
 .ct-settings-icon:hover {
   color: #2B5C8A;
-  background: rgba(106, 154, 198, 0.1);
+  background: rgba(255, 255, 255, 0.35);
   transform: rotate(90deg);
 }
 
@@ -302,42 +302,43 @@ const dateText = computed(() => {
 .ct-metrics-section {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  background: #FFFFFF;
-  border: 1px solid #D5DBE3;
+  gap: 6px;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(180, 195, 215, 0.8);
   border-radius: 8px;
   flex-shrink: 0;
-  min-height: 52px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  min-height: 48px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8);
   transition: all 0.2s ease;
 }
 
 .ct-metrics-section:hover {
-  border-color: #6A9AC6;
-  box-shadow: 0 2px 4px rgba(106, 154, 198, 0.12);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #8AAFCE;
+  box-shadow: 0 2px 6px rgba(43, 92, 138, 0.12);
 }
 
 .ct-metrics-column {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .ct-metric-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 5px;
+  font-size: 11px;
   font-weight: 600;
-  min-height: 20px;
+  min-height: 18px;
 }
 
 .ct-metric-icon {
-  font-size: 15px;
+  font-size: 14px;
   color: #7A8896;
   flex-shrink: 0;
-  width: 16px;
+  width: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -347,19 +348,19 @@ const dateText = computed(() => {
 .ct-metric-icon.battery { color: #3D8B4E; }
 
 .ct-metric-value {
-  color: #3A4A58;
+  color: #2A3A4A;
   font-weight: 700;
-  min-width: 40px;
+  min-width: 38px;
   text-align: right;
   font-family: 'Roboto Mono', 'Consolas', monospace;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .ct-metric-unit {
   font-size: 10px;
   color: #6B7885;
   font-weight: 500;
-  width: 20px;
+  width: 18px;
   text-align: left;
   font-family: 'Roboto', sans-serif;
 }
