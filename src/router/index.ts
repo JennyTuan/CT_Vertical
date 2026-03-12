@@ -1,16 +1,18 @@
 ﻿import { createRouter, createWebHistory } from 'vue-router';
-import WelcomePage from '@/pages/WelcomePage.vue';
-import PositionPage from '@/pages/PositionPage.vue';
-import ScanningPage from '@/pages/ScanningPage.vue';
-import FigmaPositionView from '@/views/FigmaPositionView.vue';
+import AppShell from '@/layouts/AppShell.vue';
+import HomeView from '@/views/HomeView.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'welcome', component: WelcomePage },
-    { path: '/position', name: 'position', component: PositionPage },
-    { path: '/figma-position', name: 'figma-position', component: FigmaPositionView },
-    { path: '/scanning', name: 'scanning', component: ScanningPage },
+    {
+      path: '/',
+      component: AppShell,
+      children: [
+        { path: '', redirect: '/home' },
+        { path: 'home', name: 'home', component: HomeView, meta: { title: '首页' } },
+      ],
+    },
   ],
 });
 
